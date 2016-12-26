@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>Grocery List</title>
     <link rel="stylesheet" href="bootstrap.min.css"/>
@@ -6,8 +7,17 @@
 <body>
 <h1>Grocery List</h1>
 <br/>
-<ul th:each="item : ${items}">
-  <li th:text="${item}">Item Name</li>
-</ul>
+
+<form th:object="${insertItem}" method="post">
+	<input id="item" type="text" th:field="*{item}"/>
+	<button type="submit">Add</button>
+</form>
+<br/>
+
+<div th:each="item : ${items}">
+  <div>
+  <h3><a th:href="${'/item/'+item.id}">Delete</a> | <span th:text="${item.item}">Item Name</span></h3>
+  </div>
+</div>
 </body>
 </html>
